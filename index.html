@@ -1,0 +1,195 @@
+# Bat
+Doing everything
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bat — ضد الوحدة والوسواس</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #e8e8e8;
+      min-height: 100vh;
+      padding: 20px;
+      line-height: 1.7;
+    }
+    .container { max-width: 700px; margin: 0 auto; }
+    h1 { text-align: center; margin-bottom: 8px; font-size: 2rem; }
+    .subtitle { text-align: center; opacity: 0.8; margin-bottom: 30px; }
+    .card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    h2 { margin-bottom: 16px; color: #7fdbff; font-size: 1.3rem; }
+    button {
+      background: #4ecca3;
+      color: #1a1a2e;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 6px 4px;
+      transition: transform 0.15s;
+    }
+    button:hover { transform: scale(1.05); }
+    button.secondary { background: #e94560; color: white; }
+    .timer { font-size: 3rem; text-align: center; margin: 20px 0; font-weight: bold; }
+    .breath-circle {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: #4ecca3;
+      margin: 20px auto;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold; color: #1a1a2e;
+      transition: transform 4s ease-in-out;
+    }
+    .prompt-box {
+      background: rgba(0,0,0,0.3);
+      padding: 16px;
+      border-radius: 10px;
+      margin-top: 12px;
+      min-height: 60px;
+    }
+    a { color: #7fdbff; }
+    .crisis { background: rgba(233,69,96,0.2); border-color: #e94560; }
+    ul { padding-right: 20px; }
+    li { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Bat</h1>
+    <p class="subtitle">أداة مساعدة ضد الوحدة والوسواس القهري</p>
+
+    <div class="card crisis">
+      <h2>⚠️ في حالة أزمة</h2>
+      <p>إذا كنت تفكر في إيذاء نفسك أو غيرك، اتصل فوراً:</p>
+      <ul>
+        <li>السعودية: 920033360 أو 937</li>
+        <li>مصر: 0800776654</li>
+        <li>الإمارات: 8004673</li>
+        <li>دولي: 988</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🌬️ تمرين التنفس (4-7-8)</h2>
+      <p>اشهق 4 ثوان ← احبس 7 ثوان ← اخرج الزفير 8 ثوان</p>
+      <div class="breath-circle" id="breathCircle">ابدأ</div>
+      <button onclick="startBreathing()">ابدأ التمرين</button>
+      <button class="secondary" onclick="stopBreathing()">إيقاف</button>
+    </div>
+
+    <div class="card">
+      <h2>⏱️ أجّل الاستجابة القهرية</h2>
+      <p>عندما يجي الوسواس، أجّل الرد عليه. ابدأ بـ 5 دقائق.</p>
+      <div class="timer" id="timer">05:00</div>
+      <button onclick="startTimer(5)">5 دقائق</button>
+      <button onclick="startTimer(10)">10 دقائق</button>
+      <button onclick="startTimer(15)">15 دقيقة</button>
+      <button class="secondary" onclick="stopTimer()">إيقاف</button>
+    </div>
+
+    <div class="card">
+      <h2>🌍 تقنية التأريض 5-4-3-2-1</h2>
+      <p>ساعد دماغك يرجع للحظة الحالية:</p>
+      <ul>
+        <li><strong>5</strong> أشياء تشوفها</li>
+        <li><strong>4</strong> أشياء تلمسها</li>
+        <li><strong>3</strong> أصوات تسمعها</li>
+        <li><strong>2</strong> روائح تشمها</li>
+        <li><strong>1</strong> شيء تتذوقه</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>💛 تمارين ضد الوحدة</h2>
+      <button onclick="showPrompt()">اسألني سؤال عشوائي</button>
+      <div class="prompt-box" id="promptBox">اضغط الزر عشان تبدأ</div>
+    </div>
+
+    <div class="card">
+      <h2>📚 موارد مفيدة</h2>
+      <ul>
+        <li><a href="https://iocdf.org/" target="_blank">International OCD Foundation</a></li>
+        <li><a href="https://www.treatmyocd.com/" target="_blank">NOCD (علاج ERP)</a></li>
+        <li><a href="https://www.7cups.com/" target="_blank">7 Cups (دردشة دعم)</a></li>
+        <li><a href="https://adaa.org/adaa-online-support-group" target="_blank">مجتمعات دعم ADAA</a></li>
+      </ul>
+    </div>
+
+    <p style="text-align:center; opacity:0.6; margin-top:30px; font-size:0.9rem;">
+      هذا ليس علاجاً طبياً. راجع متخصصاً إذا احتجت.
+    </p>
+  </div>
+
+  <script>
+    let breathInterval;
+    function startBreathing() {
+      const circle = document.getElementById('breathCircle');
+      let phase = 0;
+      const phases = [
+        { text: 'اشهق...', scale: 1.4, time: 4000 },
+        { text: 'احبس...', scale: 1.4, time: 7000 },
+        { text: 'ازفر...', scale: 1.0, time: 8000 }
+      ];
+      function next() {
+        const p = phases[phase % 3];
+        circle.textContent = p.text;
+        circle.style.transform = `scale(${p.scale})`;
+        phase++;
+        breathInterval = setTimeout(next, p.time);
+      }
+      next();
+    }
+    function stopBreathing() {
+      clearTimeout(breathInterval);
+      document.getElementById('breathCircle').textContent = 'ابدأ';
+      document.getElementById('breathCircle').style.transform = 'scale(1)';
+    }
+
+    let timerInterval;
+    function startTimer(minutes) {
+      stopTimer();
+      let total = minutes * 60;
+      const el = document.getElementById('timer');
+      timerInterval = setInterval(() => {
+        const m = Math.floor(total / 60).toString().padStart(2, '0');
+        const s = (total % 60).toString().padStart(2, '0');
+        el.textContent = `\( {m}: \){s}`;
+        if (total <= 0) {
+          stopTimer();
+          el.textContent = 'انتهى! أحسنت 💪';
+        }
+        total--;
+      }, 1000);
+    }
+    function stopTimer() {
+      clearInterval(timerInterval);
+    }
+
+    const prompts = [
+      'اكتب رسالة قصيرة لشخص ما (حتى لو ما ترسلها)',
+      'اذكر 3 أشياء صغيرة حصلت اليوم وكنت ممتن لها',
+      'تخيل إنك بتتكلم مع نفسك وأنت طفل صغير.. إيش بتقوله؟',
+      'لو في شخص وحيد زيك دلوقتي، إيش النصيحة اللي هتديها له؟',
+      'طلع من البيت ولو 10 دقايق وامشي',
+      'اسمع أغنية بتحبها بصوت عالي',
+      'اكتب عن شعور الوحدة من غير ما تحكم على نفسك'
+    ];
+    function showPrompt() {
+      const p = prompts[Math.floor(Math.random() * prompts.length)];
+      document.getElementById('promptBox').textContent = p;
+    }
+  </script>
+</body>
+</html>
